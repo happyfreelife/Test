@@ -5,8 +5,12 @@ $(function() {
 			main: 'main'
 		}
 	});
-	
+
 	define(['main'], function() {
-		$('#simpe').easySlider();
+		$('.normal').terseSlider();
+		
+		$('.vertical').terseSlider({
+			vertical: true
+		});
 	});
 });
