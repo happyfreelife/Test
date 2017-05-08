@@ -1,0 +1,2 @@
+# terseSlider
+## Refactoring, not available
