@@ -1,28 +1,7 @@
 
-
-/**
- * 滑动器初始化
- */
-;(function (window, factory) {
-	if (typeof define === 'function' && define.amd) {
-		define([
-			'global',
-			'slider',
-			'add-element'
-		], function (Global, Slider) {
-			return factory($, window, document, Global, Slider);
-		});
-	} else if (typeof exports !== 'undefined') {
-		module.exports = factory($, window, document,
-			require('global'),
-			require('slider'),
-			require('add-element')
-		);
-	} else {
-		window.terseSlider = window.terseSlider || {};
-		factory($, window, document, window.terseSlider.Global, window.terseSlider.Slider);
-	}
-}(window, function (jQuery, window, document, Global, Slider) {
+	/**
+	 * 滑动器初始化
+	 */
 	Slider.prototype.init = function() {
 		var self = this,
 			options = this.options,
@@ -73,10 +52,4 @@
 		 * 下面的语句都不需要执行了
 		 */
 		if (this.visibleItem < this.len) return;
-
-
-
-
-		// self.addElement().arrow();
 	};
-}));

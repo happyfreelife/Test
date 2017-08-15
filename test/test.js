@@ -1,16 +1,22 @@
-$(function() {
-	requirejs.config({
-		baseUrl: '../src',
-		paths: {
-			main: 'main'
-		}
-	});
-
-	define(['main'], function() {
-		$('.normal').terseSlider();
+requirejs.config({
+	baseUrl: '../src',
+	paths: {
 		
-		$('.vertical').terseSlider({
-			vertical: true
-		});
-	});
+	}
+});
+
+requirejs([
+	'util',
+	'slider',
+	'style',
+	'init',
+	'arrow',
+	'btn',
+	'animate',
+	'touch',
+	'lazyload',
+	'marquee',
+	'main'
+], function() {
+	
 });

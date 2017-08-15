@@ -1,3 +1,93 @@
+/**
+ * terseSlider
+ * Version: 0.0.2
+ * URI: https://github.com/happyfreelife/terseSlider
+ * Date: 2017-08-15
+ **/
+;(function (window, factory) {
+	if (typeof define === 'function' && define.amd) {
+		define(['jquery'], function (jQuery) {
+			factory(jQuery, window, document);
+		});
+	} else if (typeof module === 'object' && typeof module.exports) {
+		module.exports = factory(require('jQuery'), window, document);
+	} else {
+		factory(jQuery, window, document);
+	}
+}(window, function ($, window, document) {
+
+
+	/**
+	 * Plugin construct function
+	 */
+	function Slider(slider, option) {
+		this.$slider = $(slider);
+		this.option = option;
+	}
+
+
+
+	/**
+	 * 滑动器初始化
+	 */
+	Slider.prototype.init = function() {
+		var self = this,
+			options = this.options,
+			$slider = this.$slider,
+			$list = $slider.children().first(),
+			$item = $list.children();
+
+		this.$list = $list;
+		this.$item = $item;
+		this.len = $item.length;
+		this.currentIndex = 0; // 列表项当前索引
+		this.activeIndex = 0; // 切换按钮当前索引
+		this.visibleItem = 0; // 列表项可视数量
+		this.isHovered = false;
+		this.isAnimated = false;
+
+		// 滑动器的列表初始化
+		$list.wrap('<div class="ts-list"/>');
+
+		$item.addClass('ts-item');
+
+		// 响应式排版
+		if (options.responsive) {
+
+		}
+
+		// 垂直方向滑动
+		if (options.vertical) {
+			$list.parent().height($slider.height());
+
+			$slider.width($item.outerWidth(true));
+
+			this.visibleItem = Math.ceil($slider.height() / $item.outerHeight(true));
+		}
+
+		// 普通状态
+		if (!options.vertical) {
+			$list.width($item.outerWidth(true) * this.len);
+
+			$slider.height($item.height());
+
+			this.visibleItem = Math.ceil($slider.width() / $item.outerWidth(true));
+		}
+
+		/**
+		 * 当列表项的数量 小于 列表项可视数量时
+		 * 不需要使用滑动器的任何功能
+		 * 下面的语句都不需要执行了
+		 */
+		if (this.visibleItem < this.len) return;
+	};
+
+
+
+
+
+
+
 
 	/**
 	 * Plugin main method
@@ -42,8 +132,8 @@
 		});
 	};
 
-	// 指示按钮添加高亮样式
-	Slider.prototype.btnActive = function() {
+	// 指示按钮或缩略图添加高亮样式
+	Banner.prototype.btnActive = function() {
 		if (!this.option.btn) return;
 
 		var s = this;
@@ -56,7 +146,7 @@
 	};
 
 	// 切换轮播图片
-	Slider.prototype.slideTo = function() {
+	Banner.prototype.slideTo = function() {
 		var s = this;
 
 		if (s.animating) return;
@@ -65,7 +155,7 @@
 			throw new Error('terseSlider\'s index overflow!');
 		}
 
-		s.option.before.call(s, s.$Slider, s.$item, s.currentIndex);
+		s.option.before.call(s, s.$banner, s.$item, s.currentIndex);
 
 		switch (arguments[0]) {
 			case 'prev':
@@ -108,7 +198,7 @@
 				var option = $.extend(true, {}, $.fn.terseSlider.defaults,
 					typeof opt === 'object' && opt);
 
-				$(this).data('terseSlider', (terseSlider = new Slider(this, option)));
+				$(this).data('terseSlider', (terseSlider = new Banner(this, option)));
 
 				terseSlider.init();
 			} else {
@@ -145,3 +235,5 @@
 		before     : $.noop, // 滑动开始时执行的回调函数
 		after      : $.noop  // 滑动完成时执行的回调函数
 	};
+
+}));
