@@ -3,53 +3,58 @@
 	 * 滑动器初始化
 	 */
 	Slider.prototype.init = function() {
-		var self = this,
-			options = this.options,
-			$slider = this.$slider,
-			$list = $slider.children().first(),
+		var s = this,
+			o = s.option,
+			$slider = s.$slider,
+			$list = s.$slider.find('.ts-list').children(),
 			$item = $list.children();
 
-		this.$list = $list;
-		this.$item = $item;
-		this.len = $item.length;
-		this.currentIndex = 0; // 列表项当前索引
-		this.activeIndex = 0; // 切换按钮当前索引
-		this.visibleItem = 0; // 列表项可视数量
-		this.isHovered = false;
-		this.isAnimated = false;
+		if (!$list.length) {
+			console.error('please wrapper <div class="tb-list"></div> on inner list');
+			return;
+		}
+
+		s.$list = $list;
+		s.$item = $item;
+		s.len = $item.length;
+		s.currentIndex = 0;
+		s.activeIndex = 0;
+		s.isHovered = false;
+		s.isAnimated = false;
+
+		// 当列表项的数量只有一个时不使用任何功能
+		if (s.len === 1) return;
+
+		// 写入默认样式
+		// s.style();
 
 		// 滑动器的列表初始化
-		$list.wrap('<div class="ts-list"/>');
+		// $list.wrap('<div class="ts-list"/>');
 
-		$item.addClass('ts-item');
 
-		// 响应式排版
-		if (options.responsive) {
+		// 水平方向
+		if (!o.vertical) {
+			if (typeof o.slideView === 'number' && o.slideView > 0) {
+				$item.width(
+					($slider.width() - parseInt($item.css('marginRight')) * (o.slideView - 1)) /
+					o.slideView
+				);
+			}
+
+			$list.addClass('ts-horizontal');
+			$list.width($item.outerWidth(true) * s.len);
+		}
+
+
+		// 垂直方向
+		if (o.vertical) {
 
 		}
 
-		// 垂直方向滑动
-		if (options.vertical) {
-			$list.parent().height($slider.height());
+		// 循环滚动
+		if (o.loop) {
 
-			$slider.width($item.outerWidth(true));
-
-			this.visibleItem = Math.ceil($slider.height() / $item.outerHeight(true));
 		}
-
-		// 普通状态
-		if (!options.vertical) {
-			$list.width($item.outerWidth(true) * this.len);
-
-			$slider.height($item.height());
-
-			this.visibleItem = Math.ceil($slider.width() / $item.outerWidth(true));
-		}
-
-		/**
-		 * 当列表项的数量 小于 列表项可视数量时
-		 * 不需要使用滑动器的任何功能
-		 * 下面的语句都不需要执行了
-		 */
-		if (this.visibleItem < this.len) return;
+		
+		s.animate();
 	};

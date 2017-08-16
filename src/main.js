@@ -31,7 +31,7 @@
 		self.slideTimer = setInterval(function() {
 			self.options.before.call(self, self.$elem, self.$item, self.currentIndex);
 			self.currentIndex++;
-			self.play();
+			self.slide();
 		}, self.options.auto);
 
 		self.$elem.off('mouseenter.terseSlider');
@@ -130,17 +130,17 @@
 	$.fn.terseSlider.defaults = {
 		marquee    : false,  // 连续滚动模式
 		dragable   : false,  // 元素可拖拽
-		responsive : false,  // 响应式排版
 		vertical   : false,  // 垂直方向滑动
 		arrow      : false,  // 切换箭头
-		btn        : true,   // 切换按钮
+		btn        : true,   // 指示按钮
 		loop       : true,   // 循环滑动
-		offset     : 0,      // 列表偏移距离
-		slideView  : 0,      // 列表项显示的个数
-		slideGroup : 1,      // 列表项每组的个数
-		slideOffset: 0,      // 列表项偏移数量
 		auto       : 5000,   // 自动滑动: [为0时禁用此功能]
-		speed      : 800,    // 滑动速度
+		speed      : 400,    // 滑动速度
+		offset     : 0,      // 列表偏移距离
+		// slideGap   : 0,      // 列表项之间的距离
+		slideView  : 0,      // 列表项显示的个数：[设为'auto'可以自适应个数]
+		slideGroup : 1,      // 列表项每组的个数
+		slideOffset: 0,      // 列表项偏移数量：[设置此参数则offset参数失效]
 		init       : $.noop, // 轮播初始化时执行的回调函数
 		before     : $.noop, // 滑动开始时执行的回调函数
 		after      : $.noop  // 滑动完成时执行的回调函数

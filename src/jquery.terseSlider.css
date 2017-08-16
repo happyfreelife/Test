@@ -1,0 +1,18 @@
+.ts-list,
+.ts-list > *{position: relative;overflow: hidden;}
+
+.ts-list > *{width: 100000px;top: 0;left: 0;}
+.ts-list > * > *{position: relative;float: left;margin-left: 0 !important;margin-top: 0 !important;}
+.ts-list > .ts-horizontal > *{margin-bottom: 0 !important;}
+.ts-list > .ts-vertical > *{display: block;float: none;margin-right: 0 !important;}
+.ts-list > .touching{-webkit-transition-duration: 0ms !important;transition-duration: 0ms !important;}
+
+.ts-arrow{position: absolute;top: 50%;left: 0;width: 100%;}
+.ts-arrow a{position: absolute;top: 0;background-color: #333;background-color: rgba(0, 0, 0, .2);cursor: pointer;}
+.ts-arrow a.prev{left: 0;}
+.ts-arrow a.next{right: 0;}
+.ts-arrow a img{display: inline-block;max-height: 100%;}
+
+.ts-btn{position: absolute;bottom: 20px;}
+.ts-btn a{float: left;width: 10px;height: 10px;margin: 0 5px;background-color: #fff;border-radius: 50%;cursor: pointer;}
+.ts-btn a.active{background-color: #09c;};
