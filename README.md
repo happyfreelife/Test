@@ -1,1 +1,1 @@
-### This is just a test[blank](https://happyfreelife.github.io/terseBanner/example/example.html?_blank)
+## This is just a test for learning github's function
